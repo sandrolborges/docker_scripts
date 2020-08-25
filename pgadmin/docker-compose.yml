@@ -1,0 +1,16 @@
+version: "3"
+services:
+
+    pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin
+      environment:
+          PGADMIN_DEFAULT_EMAIL: "${PGADMIN_USER}"
+          PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_PASSWORD}"
+      volumes:
+         -  ./data:/data
+      ports:
+          - "13254:80"
+networks:
+    app-network:
+        driver: bridge
