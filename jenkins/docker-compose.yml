@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  jenkins:
+    build: .
+    container_name: jenkins-python3
+    restart: always
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+    volumes:
+      - /jenkins_home:/var/jenkins_home
+      - /certs:/certs/client:ro
+      - /artifacts:/home
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
+networks:
+    infra-network:
+        driver: bridge
